@@ -4,18 +4,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask wallLayer;
     [SerializeField] private float fallMultiplier;
     [SerializeField] private float lowJumpMultiplier; 
     [SerializeField] private float wallSlidingSpeed;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask wallLayer;
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
     private Animator anim;
+    private float horizontalInput;
     private bool grounded;
     private bool onWall;
-    private float horizontalInput;
-
 
     private void Awake()
     {
@@ -40,12 +39,10 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("Run", horizontalInput != 0);
         anim.SetBool("Grounded", grounded);
 
-        Move();
         CheckIfGrounded();
         CheckIfOnWall();
+        Move();
         Jump();
-        BetterJump();
-        WallSlide();
     }
 
     private void Move()
@@ -60,10 +57,6 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
         }
-    }
-
-    void BetterJump()
-    {
         if (body.velocity.y < 0)
         {
             body.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
@@ -74,13 +67,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void WallSlide()
-    {
-        if (onWall && !grounded && horizontalInput != 0)
-        {
-            body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -wallSlidingSpeed, -float.MaxValue));
-        }
-    }
     private void CheckIfOnWall()
     {
         RaycastHit2D raycastHitRight = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.right, 0.1f, groundLayer);
