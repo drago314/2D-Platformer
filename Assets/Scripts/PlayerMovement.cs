@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private bool onLeftWall, onRightWall;
     private bool isSliding;
-    private float wallJumpCounter;
+    private int jumpCounter;
+    private float wallJumpTimer;
 
     private void Awake()
     {
@@ -41,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
         CheckIfGrounded();
         CheckIfOnWall();
-        if (wallJumpCounter <= 0)
+        CheckIfCanJump();
+        if (wallJumpTimer <= 0)
         {
             //Flipping Character Model
             if (horizontalInput > 0.01f)
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            wallJumpCounter -= Time.deltaTime;
+            wallJumpTimer -= Time.deltaTime;
         }
     }
 
@@ -66,8 +68,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpCounter < 2)
         {
+            Invoke("AddJump", 0.1f);
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
         }
@@ -91,10 +94,11 @@ public class PlayerMovement : MonoBehaviour
             body.velocity = Vector2.zero;
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                wallJumpCounter = wallJumpTime;
+                wallJumpTimer = wallJumpTime;
                 body.velocity = new Vector2(-horizontalInput * wallJumpSideForce, wallJumpUpForce);
                 body.gravityScale = gravityStore;
                 isSliding = false;
+                jumpCounter = 1;
             }
         }
         else
@@ -117,11 +121,24 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = raycastHit.collider != null;
     }
 
+    private void CheckIfCanJump()
+    {
+        if (isGrounded)
+        {
+            jumpCounter = 0;
+        }
+    }
+
+    private void AddJump()
+    {
+        jumpCounter += 1;
+    }
+    
     private void OnGUI()
     {
         if (GUILayout.Button("Press Me"))
         {
-            Debug.Log("Hello, World");
+            Debug.Log(jumpCounter);
         }
     }
 }

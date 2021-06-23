@@ -1,5 +1,0 @@
-Three Problems:
-
-1. Tippy tippy
-2. Press Right before wall jump no jumpy (low priority)
-3. Wall jump doesn't have variable jump height.

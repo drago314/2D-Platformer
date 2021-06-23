@@ -164,7 +164,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &233249101
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
-  fallMultiplier: 2.5
+  fallMultiplier: 2.25
   lowJumpMultiplier: 2
   slidingGravity: 0.5
   wallJumpTime: 0.2
