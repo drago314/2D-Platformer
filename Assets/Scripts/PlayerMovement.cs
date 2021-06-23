@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && jumpCounter < 2)
+        if (Input.GetButtonDown("Jump") && jumpCounter < 2)
         {
             Invoke("AddJump", 0.1f);
             body.velocity = new Vector2(body.velocity.x, jumpForce);
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         {
             body.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (body.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (body.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             body.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
@@ -92,13 +92,12 @@ public class PlayerMovement : MonoBehaviour
         {
             body.gravityScale = slidingGravity;
             body.velocity = Vector2.zero;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetButtonDown("Jump"))
             {
                 wallJumpTimer = wallJumpTime;
                 body.velocity = new Vector2(-horizontalInput * wallJumpSideForce, wallJumpUpForce);
                 body.gravityScale = gravityStore;
                 isSliding = false;
-                jumpCounter = 1;
             }
         }
         else
@@ -123,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckIfCanJump()
     {
-        if (isGrounded)
+        if (isGrounded || isSliding)
         {
             jumpCounter = 0;
         }
