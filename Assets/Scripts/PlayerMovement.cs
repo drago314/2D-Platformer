@@ -133,12 +133,12 @@ public class PlayerMovement : MonoBehaviour
     {
         jumpCounter += 1;
     }
-    
+
     private void OnGUI()
     {
-        if (GUILayout.Button("Press Me"))
+        if (Application.isEditor)
         {
-            Debug.Log(jumpCounter);
+            GUI.Label(new Rect(10, 10, 100, 20), "Jump Counter: " + jumpCounter);
         }
     }
 }
