@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallMultiplier;
     [SerializeField] private float lowJumpMultiplier;
     [SerializeField] private float slidingGravity;
+    [SerializeField] private float minWallSlideSpeed;
+    [SerializeField] private float maxWallSlideSpeed;
     [SerializeField] private float wallJumpTime;
     [SerializeField] private float wallJumpSideForce;
     [SerializeField] private float wallJumpUpForce;
@@ -86,12 +88,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallMovement()
     {
+        if (isSliding == false && (!isGrounded && ((onLeftWall && horizontalInput < 0) || (onRightWall && horizontalInput > 0))))
+        {
+            body.velocity = Vector2.zero;
+        }
+
         isSliding = !isGrounded && ((onLeftWall && horizontalInput < 0) || (onRightWall && horizontalInput > 0));
 
         if (isSliding == true)
         {
             body.gravityScale = slidingGravity;
-            body.velocity = Vector2.zero;
+            body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -maxWallSlideSpeed, -minWallSlideSpeed));
             if (Input.GetButtonDown("Jump"))
             {
                 wallJumpTimer = wallJumpTime;
