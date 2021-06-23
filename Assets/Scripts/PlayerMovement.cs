@@ -116,5 +116,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.05f, groundLayer);
         isGrounded = raycastHit.collider != null;
     }
+
+    private void OnGUI()
+    {
+        if (GUILayout.Button("Press Me"))
+        {
+            Debug.Log("Hello, World");
+        }
+    }
 }
 
