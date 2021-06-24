@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wallJumpTime;
     [SerializeField] private float wallJumpSideForce;
     [SerializeField] private float wallJumpUpForce;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashSideForce;
     [SerializeField] private LayerMask groundLayer;
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
@@ -23,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isSliding;
     private int jumpCounter;
     private float wallJumpTimer;
+    private bool canDash;
+    private float dashTimer;
 
     private void Awake()
     {
@@ -45,8 +49,12 @@ public class PlayerMovement : MonoBehaviour
         CheckIfGrounded();
         CheckIfOnWall();
         CheckIfCanJump();
-        if (wallJumpTimer <= 0)
+        CheckIfCanDash();
+
+        if (wallJumpTimer <= 0 && dashTimer <= 0)
         {
+            anim.SetBool("IsDashing", false);
+
             //Flipping Character Model
             if (horizontalInput > 0.01f)
                 transform.localScale = new Vector2(1, 1);
@@ -56,10 +64,20 @@ public class PlayerMovement : MonoBehaviour
             Move();
             Jump();
             WallMovement();
+            Dash();
+        }
+        else if (wallJumpTimer >= 0)
+        {
+            wallJumpTimer -= Time.deltaTime;
         }
         else
         {
-            wallJumpTimer -= Time.deltaTime;
+            dashTimer -= Time.deltaTime;
+            if (onLeftWall || onRightWall)
+            {
+                dashTimer = 0;
+                anim.SetBool("IsDashing", false);
+            }
         }
     }
 
@@ -113,6 +131,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Dash()
+    {
+        if (canDash == true && Input.GetButtonDown("Dash"))
+        {
+            anim.SetBool("IsDashing", true);
+            dashTimer = dashTime;
+            body.velocity = new Vector2(transform.localScale.x * dashSideForce, 0);
+            body.gravityScale = 0;
+            canDash = false;
+        }
+    }
+
     private void CheckIfOnWall()
     {
         RaycastHit2D raycastHitRight = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.right, 0.1f, groundLayer);
@@ -140,11 +170,24 @@ public class PlayerMovement : MonoBehaviour
         jumpCounter += 1;
     }
 
+    private void CheckIfCanDash()
+    {
+        if (isGrounded || wallJumpTimer > 0)
+        {
+            canDash = true;
+        }
+        if (isSliding)
+        {
+            canDash = false;
+        }
+    }   
+
     private void OnGUI()
     {
         if (Application.isEditor)
         {
             GUI.Label(new Rect(10, 10, 100, 20), "Jump Counter: " + jumpCounter);
+            GUI.Label(new Rect(10, 20, 100, 20), "Can Dash: " + canDash);
         }
     }
 }

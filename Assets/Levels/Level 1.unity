@@ -470,6 +470,8 @@ MonoBehaviour:
   wallJumpTime: 0.2
   wallJumpSideForce: 5
   wallJumpUpForce: 5
+  dashTime: 0.25
+  dashSideForce: 25
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
