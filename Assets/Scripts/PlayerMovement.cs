@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float gravityStore;
     private bool isGrounded;
     private bool onLeftWall, onRightWall;
-    private bool isSliding;
+    private bool isSliding, wasSliding;
     private int jumpCounter;
     private float wallJumpTimer;
     private bool canDash;
@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isSliding == true)
         {
+            wasSliding = true;
             body.gravityScale = slidingGravity;
             body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -maxWallSlideSpeed, -minWallSlideSpeed));
             if (Input.GetButtonDown("Jump"))
@@ -127,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            wasSliding = false;
             body.gravityScale = gravityStore;
         }
     }
@@ -180,14 +182,18 @@ public class PlayerMovement : MonoBehaviour
         {
             canDash = false;
         }
+        if (wasSliding)
+        {
+            canDash = true;
+        }
     }   
 
     private void OnGUI()
     {
         if (Application.isEditor)
         {
-            GUI.Label(new Rect(10, 10, 100, 20), "Jump Counter: " + jumpCounter);
-            GUI.Label(new Rect(10, 20, 100, 20), "Can Dash: " + canDash);
+            GUI.Label(new Rect(1300, 10, 100, 20), "Jump Counter: " + jumpCounter);
+            GUI.Label(new Rect(1300, 20, 100, 20), "Can Dash: " + canDash);
         }
     }
 }
