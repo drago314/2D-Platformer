@@ -178,13 +178,13 @@ public class PlayerMovement : MonoBehaviour
         {
             canDash = true;
         }
-        if (isSliding)
-        {
-            canDash = false;
-        }
         if (wasSliding)
         {
             canDash = true;
+        }
+        if (isSliding)
+        {
+            canDash = false;
         }
     }   
 
