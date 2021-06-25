@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        DontDestroyOnLoad(gameObject);
+
         gravityStore = body.gravityScale;
     }
 
@@ -80,7 +82,10 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    private void OnLevelWasLoaded(int level)
+    {
+        body.position = Vector2.zero;
+    }
     private void Move()
     {
         body.velocity = new Vector2(horizontalInput * moveSpeed, body.velocity.y);
