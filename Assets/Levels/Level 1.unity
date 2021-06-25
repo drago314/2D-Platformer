@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 348297402}
   - component: {fileID: 348297401}
   m_Layer: 0
-  m_Name: _GM
+  m_Name: Parallaxing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,7 +987,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157, y: -24.600006}
+  m_AnchoredPosition: {x: 157, y: -24.599976}
   m_SizeDelta: {x: 2589.0195, y: 50.199585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878221470
@@ -1062,7 +1062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157, y: -24.600006}
+  m_AnchoredPosition: {x: 157, y: -24.599976}
   m_SizeDelta: {x: 2589.0195, y: 50.199585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905184305
