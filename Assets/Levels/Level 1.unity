@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 233249105}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -985,10 +985,10 @@ RectTransform:
   m_Father: {fileID: 1837828910}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -577, y: 341.4}
-  m_SizeDelta: {x: 2589.0195, y: 50.1996}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 157, y: -24.600006}
+  m_SizeDelta: {x: 2589.0195, y: 50.199585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878221470
 MonoBehaviour:
@@ -1060,10 +1060,10 @@ RectTransform:
   m_Father: {fileID: 1837828910}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -577, y: 341.4}
-  m_SizeDelta: {x: 2589.0195, y: 50.1996}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 157, y: -24.600006}
+  m_SizeDelta: {x: 2589.0195, y: 50.199585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905184305
 MonoBehaviour:
@@ -1961,6 +1961,24 @@ MonoBehaviour:
   playerHealth: {fileID: 233249106}
   totalHealthBar: {fileID: 878221470}
   currentHealthBar: {fileID: 905184305}
+--- !u!1 &1920703253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4258631399768020917, guid: eaa43776e35f049458dbe7c8051b0d3f, type: 3}
+  m_PrefabInstance: {fileID: 4258631398292478806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1920703254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920703253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72389be08492fd84a961ca212c7971b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &1931903107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2168,6 +2186,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258631399768020914, guid: eaa43776e35f049458dbe7c8051b0d3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258631399768020915, guid: eaa43776e35f049458dbe7c8051b0d3f, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4258631399768020917, guid: eaa43776e35f049458dbe7c8051b0d3f, type: 3}
