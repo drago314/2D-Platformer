@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int startingHealth;
+    [SerializeField] private PlayerDeath player;
 
     private void Update()
     {
@@ -19,11 +20,11 @@ public class Health : MonoBehaviour
         GameManager.Instance.playerHealth = Mathf.Clamp(GameManager.Instance.playerHealth - damage, 0, GameManager.Instance.playerStartingHealth);
         if (GameManager.Instance.playerHealth > 0)
         {
-            //damage
+            player.TakeDamage();
         }
         else
         {
-            //die
+            player.Die();
         }
     }
 
