@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float startingHealth;
-    public float currentHealth { get; private set;  } 
-
-    private void Awake()
-    {
-        currentHealth = startingHealth;
-    }
+    [SerializeField] private int startingHealth;
 
     private void Update()
     {
@@ -20,10 +14,10 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float _damage)
+    public void TakeDamage(int damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
-        if (currentHealth > 0)
+        GameManager.Instance.playerHealth = Mathf.Clamp(GameManager.Instance.playerHealth - damage, 0, GameManager.Instance.playerStartingHealth);
+        if (GameManager.Instance.playerHealth > 0)
         {
             //damage
         }

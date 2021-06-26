@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spike : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

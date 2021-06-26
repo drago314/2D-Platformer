@@ -35,14 +35,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        DontDestroyOnLoad(gameObject);
-
         gravityStore = body.gravityScale;
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Update()
@@ -88,10 +81,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        body.position = Vector2.zero;
-    }
     private void Move()
     {
         body.velocity = new Vector2(horizontalInput * moveSpeed, body.velocity.y);
@@ -198,14 +187,5 @@ public class PlayerMovement : MonoBehaviour
             canDash = false;
         }
     }   
-
-    private void OnGUI()
-    {
-        if (Application.isEditor)
-        {
-            GUI.Label(new Rect(1300, 10, 100, 20), "Jump Counter: " + jumpCounter);
-            GUI.Label(new Rect(1300, 20, 100, 20), "Can Dash: " + canDash);
-        }
-    }
 }
 
