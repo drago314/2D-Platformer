@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
@@ -38,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         gravityStore = body.gravityScale;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Update()
@@ -82,7 +87,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    private void OnLevelWasLoaded(int level)
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         body.position = Vector2.zero;
     }
