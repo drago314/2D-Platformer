@@ -13,6 +13,5 @@ public class Door : MonoBehaviour
         {
             SceneManager.LoadScene(sceneName);
         }
-
     }
 }
