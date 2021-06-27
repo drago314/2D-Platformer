@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private int maxHealth;
-    private int currentHealth;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int currentHealth;
     private bool isHit;
     private bool isDead;
     private const int MIN_HEALTH = 0;
+    private IHealthCallback listener;
 
     private void Awake()
     {
@@ -18,24 +19,9 @@ public class Health : MonoBehaviour
         }
     }
 
-    public int GetCurrentHealth()
+    public void SetCallbackListener(IHealthCallback listener)
     {
-        return currentHealth;
-    }
-
-    public void SetCurrentHealth(int health)
-    {
-        currentHealth = health;
-    }
-
-    public int GetStartingHealth()
-    {
-        return maxHealth;
-    }
-
-    public void SetStartingHealth(int health)
-    {
-        maxHealth = health;
+        this.listener = listener;
     }
 
     public bool IsHit()
@@ -78,7 +64,9 @@ public class Health : MonoBehaviour
         {
             this.isDead = true;
             this.currentHealth = MIN_HEALTH;
+            listener.OnDeath();
         }
+        listener.OnHit();
     }
 
     /// <param name="_heal">the heal amount.</param>
@@ -87,6 +75,7 @@ public class Health : MonoBehaviour
         if (currentHealth != MIN_HEALTH && !isDead)
         {
             this.currentHealth = Mathf.Clamp(currentHealth + heal, MIN_HEALTH, this.maxHealth);
+            listener.OnHeal();
         }
     }
 
@@ -99,6 +88,7 @@ public class Health : MonoBehaviour
         if (currentHealth != MIN_HEALTH && revive)
         {
             this.isDead = false;
+            listener.OnHeal();
         }
     }
 }
