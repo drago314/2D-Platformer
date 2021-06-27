@@ -7,4 +7,5 @@ public interface IHealthCallback
     void OnHit();
     void OnDeath();
     void OnHeal();
+    void OnHealthChanged(int currentHealth, int MaxHealth);
 }

@@ -7,21 +7,6 @@ public class Player : MonoBehaviour, IHealthCallback
     private Animator anim;
     private Health health;
 
-    public void OnDeath()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnHeal()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnHit()
-    {
-        throw new System.NotImplementedException();
-    }
-
     private void Awake()
     {
         health = gameObject.GetComponent<Health>();
@@ -29,16 +14,21 @@ public class Player : MonoBehaviour, IHealthCallback
         anim = gameObject.GetComponent<Animator>();
     }
 
-    private void Update()
+    public void OnDeath()
     {
-        if (health.IsDead())
-        {
-            anim.SetTrigger("Die");
-        }
-        else if (health.IsHit())
-        {
-            anim.SetTrigger("Damage");
-            health.SetIsHit(false);
-        }
+        anim.SetTrigger("Die");
+    }
+
+    public void OnHeal()
+    {
+    }
+
+    public void OnHit()
+    {
+        anim.SetTrigger("Damage");
+    }
+
+    public void OnHealthChanged(int currentHealth, int MaxHealth)
+    {
     }
 }

@@ -1540,6 +1540,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: currentHealth
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7910211942306144915, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: startingHealth
       value: 5

@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
     private bool isHit;
     private bool isDead;
     private const int MIN_HEALTH = 0;
-    private IHealthCallback listener;
+    private ArrayList listeners = new ArrayList();
 
     private void Awake()
     {
@@ -19,11 +19,19 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void SetCallbackListener(IHealthCallback listener)
+    private void Start()
     {
-        this.listener = listener;
+        foreach (IHealthCallback listener in listeners)
+        {
+            listener.OnHealthChanged(currentHealth, maxHealth);
+        }
     }
 
+    public void SetCallbackListener(IHealthCallback listener)
+    {
+        this.listeners.Add(listener);
+    }
+    
     public bool IsHit()
     {
         return this.isHit;
@@ -64,9 +72,17 @@ public class Health : MonoBehaviour
         {
             this.isDead = true;
             this.currentHealth = MIN_HEALTH;
-            listener.OnDeath();
+            foreach (IHealthCallback listener in listeners)
+            {
+                listener.OnDeath();
+                listener.OnHealthChanged(currentHealth, maxHealth);
+            }
         }
-        listener.OnHit();
+        foreach (IHealthCallback listener in listeners)
+        {
+            listener.OnHit();
+            listener.OnHealthChanged(currentHealth, maxHealth);
+        }
     }
 
     /// <param name="_heal">the heal amount.</param>
@@ -75,7 +91,11 @@ public class Health : MonoBehaviour
         if (currentHealth != MIN_HEALTH && !isDead)
         {
             this.currentHealth = Mathf.Clamp(currentHealth + heal, MIN_HEALTH, this.maxHealth);
-            listener.OnHeal();
+            foreach (IHealthCallback listener in listeners)
+            {
+                listener.OnHeal();
+                listener.OnHealthChanged(currentHealth, maxHealth);
+            }
         }
     }
 
@@ -88,7 +108,11 @@ public class Health : MonoBehaviour
         if (currentHealth != MIN_HEALTH && revive)
         {
             this.isDead = false;
-            listener.OnHeal();
+            foreach (IHealthCallback listener in listeners)
+            {
+                listener.OnHeal();
+                listener.OnHealthChanged(currentHealth, maxHealth);
+            }
         }
     }
 }
