@@ -4,28 +4,72 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int startingHealth;
-    [SerializeField] private PlayerDeath player;
+    private int maxHealth;
+    private int currentHealth;
+    private bool isHit;
+    private bool isDead;
+
+
+    private void Awake()
+    {
+        GameManager.Instance.playerHealth = this;
+    }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (currentHealth <= 0 && !isDead)
         {
-            TakeDamage(1);
+            isDead = true;
         }
+        GameManager.Instance.playerHealth = this;
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public void SetCurrentHealth(int health)
+    {
+        currentHealth = health;
+    }
+
+    public int GetStartingHealth()
+    {
+        return maxHealth;
+    }
+
+    public void SetStartingHealth(int health)
+    {
+        maxHealth = health;
+    }
+
+    public bool IsHit()
+    {
+        return isHit;
+    }
+
+    public void SetIsHit(bool isHit)
+    {
+        this.isHit = isHit;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 
     public void TakeDamage(int damage)
     {
-        GameManager.Instance.playerHealth = Mathf.Clamp(GameManager.Instance.playerHealth - damage, 0, GameManager.Instance.playerStartingHealth);
-        if (GameManager.Instance.playerHealth > 0)
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
+        if (currentHealth > 0)
         {
-            player.TakeDamage();
-        }
-        else
-        {
-            player.Die();
+            isHit = true;
         }
     }
 
+    public void HealDamage(int healing)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + healing, 0, startingHealth);
+    }
 }

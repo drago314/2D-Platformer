@@ -5,14 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
-    [SerializeField] private Animator anim;
-    [SerializeField] private float transitionTime;
-    public void LoadScene(string sceneName)
+    public static LevelLoader Instance;
+
+    public const string FADE = "fade";
+
+    [SerializeField] private static Animator anim;
+
+    private void Awake()
     {
-        StartCoroutine(LoadSceneTransition(sceneName));
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+            anim = gameObject.GetComponent<Animator>();
+        }
     }
 
-    IEnumerator LoadSceneTransition(string sceneName)
+    public void LoadScene(string sceneName, string loadType)
+    {
+        if (loadType == FADE)
+            StartCoroutine(LoadFadeTransition(sceneName, 1));
+    }
+
+    IEnumerator LoadFadeTransition(string sceneName, float transitionTime)
     {
         anim.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);

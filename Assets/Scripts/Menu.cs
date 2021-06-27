@@ -5,11 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] LevelLoader levelLoader;
-
     public void PlayGame()
     {
-        levelLoader.LoadScene("Level 1");
+        LevelLoader.Instance.LoadScene("Level 1", LevelLoader.FADE);
     }
 
     public void QuitGame()
