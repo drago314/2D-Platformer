@@ -8,20 +8,14 @@ public class Health : MonoBehaviour
     private int currentHealth;
     private bool isHit;
     private bool isDead;
-
+    private const int MIN_HEALTH = 0;
 
     private void Awake()
     {
-        GameManager.Instance.playerHealth = this;
-    }
-
-    private void Update()
-    {
-        if (currentHealth <= 0 && !isDead)
+        if (this.currentHealth > this.maxHealth)
         {
-            isDead = true;
+            this.currentHealth = maxHealth;
         }
-        GameManager.Instance.playerHealth = this;
     }
 
     public int GetCurrentHealth()
@@ -46,7 +40,7 @@ public class Health : MonoBehaviour
 
     public bool IsHit()
     {
-        return isHit;
+        return this.isHit;
     }
 
     public void SetIsHit(bool isHit)
@@ -54,22 +48,57 @@ public class Health : MonoBehaviour
         this.isHit = isHit;
     }
 
+    /// <returns>A boolean of the current deathstate.</returns>
     public bool IsDead()
     {
-        return isDead;
+        return this.isDead;
     }
 
-    public void TakeDamage(int damage)
+    /// <returns>A float representing the current health.</returns>
+    public float GetHealth()
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-        if (currentHealth > 0)
+        return this.currentHealth;
+    }
+
+    /// <param name="value">the new max health amount.</param>
+    public void SetMaxHealth(int value)
+    {
+        if (this.currentHealth > value)
         {
-            isHit = true;
+            this.maxHealth = value;
+            this.currentHealth = value;
         }
     }
 
-    public void HealDamage(int healing)
+    /// <param name="damage">the damage amount.</param>
+    public void Damage(int damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth + healing, 0, startingHealth);
+        this.currentHealth = Mathf.Clamp(currentHealth - damage, MIN_HEALTH, this.maxHealth);
+        if (currentHealth <= MIN_HEALTH)
+        {
+            this.isDead = true;
+            this.currentHealth = MIN_HEALTH;
+        }
+    }
+
+    /// <param name="_heal">the heal amount.</param>
+    public void Heal(int heal)
+    {
+        if (currentHealth != MIN_HEALTH && !isDead)
+        {
+            this.currentHealth = Mathf.Clamp(currentHealth + heal, MIN_HEALTH, this.maxHealth);
+        }
+    }
+
+
+    /// <param name="_heal">the heal amount.</param>
+    /// <param name="_revive">Defines if the heal should be able to revive.</param>
+    public void Heal(int heal, bool revive)
+    {
+        this.currentHealth = Mathf.Clamp(currentHealth + heal, MIN_HEALTH, this.maxHealth);
+        if (currentHealth != MIN_HEALTH && revive)
+        {
+            this.isDead = false;
+        }
     }
 }
