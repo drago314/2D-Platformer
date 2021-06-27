@@ -249,6 +249,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6144951021331344315, guid: a10055286f770814cb3b72e6a0a74913, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 1718165390}
     - target: {fileID: 6144951021513544753, guid: a10055286f770814cb3b72e6a0a74913, type: 3}
       propertyPath: m_Name
       value: Health
@@ -427,6 +431,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718165390 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+  m_PrefabInstance: {fileID: 1750440486}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d13b41a26d0f1c4bb5172714f05b3bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1722805492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -542,6 +557,14 @@ PrefabInstance:
     - target: {fileID: 4055037774459981702, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: maxHealth
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: currentHealth
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}

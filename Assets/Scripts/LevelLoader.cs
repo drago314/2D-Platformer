@@ -21,7 +21,7 @@ public class LevelLoader : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
-            anim = gameObject.GetComponent<Animator>();
+            anim = GetComponentInChildren<Animator>();
         }
     }
 
@@ -36,5 +36,6 @@ public class LevelLoader : MonoBehaviour
         anim.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneName);
+        anim.SetTrigger("End");
     }
 }

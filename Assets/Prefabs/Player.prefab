@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d13b41a26d0f1c4bb5172714f05b3bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 4055037774459981724}
+  maxHealth: 5
+  currentHealth: 5
 --- !u!114 &7910211942306144915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,8 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76106f3a05aa214594f8d0411d30038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 5
-  anim: {fileID: 4055037774459981724}
 --- !u!95 &4055037774459981724
 Animator:
   serializedVersion: 3

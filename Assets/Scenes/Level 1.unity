@@ -1205,6 +1205,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6554452174108602568, guid: 6acf807f6d7994d4b93b9476ea71af7f, type: 3}
+      propertyPath: loadType
+      value: fade
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554452174108602568, guid: 6acf807f6d7994d4b93b9476ea71af7f, type: 3}
       propertyPath: sceneName
       value: Level 2
       objectReference: {fileID: 0}
@@ -1669,6 +1673,10 @@ PrefabInstance:
     - target: {fileID: 5559731815396835105, guid: 6acf807f6d7994d4b93b9476ea71af7f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554452174108602568, guid: 6acf807f6d7994d4b93b9476ea71af7f, type: 3}
+      propertyPath: loadType
+      value: fade
       objectReference: {fileID: 0}
     - target: {fileID: 6554452174108602568, guid: 6acf807f6d7994d4b93b9476ea71af7f, type: 3}
       propertyPath: sceneName
