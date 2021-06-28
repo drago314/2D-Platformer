@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour, IHealthCallback
     private void Start()
     {
         health.SetCallbackListener(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void OnDeath()
@@ -30,6 +31,5 @@ public class HealthBar : MonoBehaviour, IHealthCallback
     {
         currentHealthBar.fillAmount = currentHealth / 5f;
         totalHealthBar.fillAmount = MaxHealth / 5f;
-
     }
 }
