@@ -24,6 +24,7 @@ public class LevelLoader : MonoBehaviour
             Instance = this;
             anim = GetComponentInChildren<Animator>();
         }
+        player.OnSpawn(SceneManager.GetActiveScene().name);
     }
 
     public void LoadScene(string sceneName, string loadType)

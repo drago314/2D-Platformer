@@ -1228,6 +1228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 817711552321642818, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 817711552321642828, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
       propertyPath: player
       value: 
@@ -1533,6 +1537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981702, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4055037774459981725, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1692,14 +1700,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: health
-      value: 
-      objectReference: {fileID: 233249106}
-    - target: {fileID: 0}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 233249106}
     - target: {fileID: 6144951021513544753, guid: a10055286f770814cb3b72e6a0a74913, type: 3}
       propertyPath: m_Name
       value: Health

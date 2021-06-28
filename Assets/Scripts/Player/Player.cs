@@ -35,6 +35,12 @@ public class Player : MonoBehaviour, IHealthCallback
     {
     }
 
+    public void OnSpawn(string currentScene)
+    { 
+        if (currentScene == "Menu")
+            body.position = new Vector2(-100, -100);
+    }
+
     public void OnSpawn(string currentScene, string newScene)
     {
         body.position = Vector2.zero;

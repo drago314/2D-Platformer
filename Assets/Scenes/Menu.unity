@@ -256,6 +256,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184897167}
   m_CullTransparentMesh: 1
+--- !u!1001 &621120530
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981702, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+--- !u!114 &621120531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7910211942306144915, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+  m_PrefabInstance: {fileID: 621120530}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76106f3a05aa214594f8d0411d30038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &689741851
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,6 +1063,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 817711552321642828, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 621120531}
     - target: {fileID: 817711552321642829, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1097,17 +1169,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
---- !u!114 &1770074133 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 817711552321642828, guid: 0e44b4553594fcf4e89398e93defc8fd, type: 3}
-  m_PrefabInstance: {fileID: 1770074132}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 625fe01eac1cc0846a14cf49a9feee39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1852692979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,4 +1219,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15dec86db1a11f43849cd10c1ba5138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelLoader: {fileID: 1770074133}
