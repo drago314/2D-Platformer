@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
@@ -18,7 +19,12 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
     private Animator anim;
+    private Vector2 joystickInput;
     private float horizontalInput;
+    private bool jumpPressed;
+    private bool jumpInputUsed;
+    private bool dashPressed;
+    private bool dashInputUsed;
     private float gravityStore;
     private bool isGrounded;
     private bool onLeftWall, onRightWall;
@@ -40,8 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
         //Set animation parameters
         anim.SetBool("Run", horizontalInput != 0);
         anim.SetBool("Grounded", isGrounded);
@@ -88,17 +92,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCounter < 2)
+        if (jumpCounter < 2 && !jumpInputUsed && !isSliding)
         {
             Invoke("AddJump", 0.1f);
             body.velocity = new Vector2(body.velocity.x, jumpForce);
             anim.SetTrigger("Jump");
+            jumpInputUsed = true;
         }
         if (body.velocity.y < 0)
         {
             body.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (body.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (body.velocity.y > 0 && !jumpPressed)
         {
             body.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
@@ -106,24 +111,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void WallMovement()
     {
-        if (isSliding == false && (!isGrounded && ((onLeftWall && horizontalInput < 0) || (onRightWall && horizontalInput > 0))))
+        if (wasSliding = false && isSliding)
         {
             body.velocity = Vector2.zero;
         }
 
-        isSliding = !isGrounded && ((onLeftWall && horizontalInput < 0) || (onRightWall && horizontalInput > 0));
-
         if (isSliding == true)
         {
+            dashInputUsed = true;
             wasSliding = true;
             body.gravityScale = slidingGravity;
             body.velocity = new Vector2(body.velocity.x, Mathf.Clamp(body.velocity.y, -maxWallSlideSpeed, -minWallSlideSpeed));
-            if (Input.GetButtonDown("Jump"))
+            if (!jumpInputUsed)
             {
                 wallJumpTimer = wallJumpTime;
                 body.velocity = new Vector2(-horizontalInput * wallJumpSideForce, wallJumpUpForce);
                 body.gravityScale = gravityStore;
                 isSliding = false;
+                jumpInputUsed = true;
             }
         }
         else
@@ -135,13 +140,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        if (canDash == true && Input.GetButtonDown("Dash"))
+        if (canDash == true && !dashInputUsed)
         {
             anim.SetBool("IsDashing", true);
             dashTimer = dashTime;
             body.velocity = new Vector2(transform.localScale.x * dashSideForce, 0);
             body.gravityScale = 0;
             canDash = false;
+            dashInputUsed = true;
         }
     }
 
@@ -151,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHitLeft = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.left, 0.1f, groundLayer);
         onLeftWall = raycastHitLeft.collider != null;
         onRightWall = raycastHitRight.collider != null;
+        isSliding = !isGrounded && ((onLeftWall && horizontalInput < 0) || (onRightWall && horizontalInput > 0));
     }
 
     private void CheckIfGrounded()
@@ -164,6 +171,10 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded || isSliding)
         {
             jumpCounter = 0;
+        }
+        if (wasSliding)
+        {
+            jumpCounter = 1;
         }
     }
 
@@ -186,6 +197,36 @@ public class PlayerMovement : MonoBehaviour
         {
             canDash = false;
         }
-    }   
+    }
+
+    private void OnMove(InputValue value)
+    {
+        joystickInput = value.Get<Vector2>();
+        horizontalInput = joystickInput.x;
+    }
+
+    private void OnJump(InputValue value)
+    {
+        jumpPressed = value.isPressed;
+        if (jumpPressed)
+        {
+            jumpInputUsed = false;
+        }
+    }
+
+    private void OnDash(InputValue value)
+    {
+        dashPressed = value.isPressed;
+        if (dashPressed)
+        {
+            dashInputUsed = false;
+        }
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(1200, 10, 100, 100), "Jump Counter: " + jumpCounter);
+        GUI.Label(new Rect(1200, 30, 100, 100), "Jump Input: " + jumpInputUsed);
+    }
 }
 

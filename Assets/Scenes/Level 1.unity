@@ -1474,10 +1474,6 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1503,18 +1499,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981698, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4055037774459981699, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
@@ -1549,13 +1533,9 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: maxHealth
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
-      propertyPath: currentHealth
-      value: 5
+    - target: {fileID: 7440151542655002150, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7910211942306144915, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: startingHealth
