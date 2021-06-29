@@ -1529,6 +1529,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981725, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: controlDashTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4055037774459981725, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
+      propertyPath: controlDashSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4055037774459981727, guid: 6d145e512e848bd478863105ba2c5f3a, type: 3}
       propertyPath: player
       value: 

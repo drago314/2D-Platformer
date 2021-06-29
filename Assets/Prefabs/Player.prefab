@@ -160,6 +160,7 @@ MonoBehaviour:
   wallJumpUpForce: 5
   dashTime: 0.25
   dashSideForce: 25
+  controlDashTime: 2
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -235,6 +236,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

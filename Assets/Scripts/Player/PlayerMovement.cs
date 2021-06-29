@@ -1,5 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float wallJumpUpForce;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSideForce;
+    [SerializeField] private float controlDashTime;
+    [SerializeField] private float controlDashSideSpeed;
+    [SerializeField] private float controlDashUpSpeed;
+    [SerializeField] private float controlDashSlowdown;
     [SerializeField] private LayerMask groundLayer;
     private BoxCollider2D boxCollider;
     private Rigidbody2D body;
@@ -25,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jumpInputUsed;
     private bool dashPressed;
     private bool dashInputUsed;
+    private bool controlDashPressed;
     private float gravityStore;
     private bool isGrounded;
     private bool onLeftWall, onRightWall;
@@ -33,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpTimer;
     private bool canDash;
     private float dashTimer;
+    private bool canControlDash;
+    private bool isControlDashing;
+    private bool wasControlDashing;
+    private float controlDashTimer;
 
     private void Awake()
     {
@@ -54,8 +64,9 @@ public class PlayerMovement : MonoBehaviour
         CheckIfOnWall();
         CheckIfCanJump();
         CheckIfCanDash();
+        CheckIfCanControlDash();
 
-        if (wallJumpTimer <= 0 && dashTimer <= 0)
+        if (wallJumpTimer <= 0 && dashTimer <= 0 && !isControlDashing)
         {
             anim.SetBool("IsDashing", false);
 
@@ -69,12 +80,13 @@ public class PlayerMovement : MonoBehaviour
             Jump();
             WallMovement();
             Dash();
+            ControlDash();
         }
         else if (wallJumpTimer >= 0)
         {
             wallJumpTimer -= Time.deltaTime;
         }
-        else
+        else if (dashTimer >= 0)
         {
             dashTimer -= Time.deltaTime;
             if (onLeftWall || onRightWall)
@@ -82,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
                 dashTimer = 0;
                 anim.SetBool("IsDashing", false);
             }
+        }
+        else if (isControlDashing)
+        {
+            controlDashTimer -= Time.deltaTime;
+            ControlDash();
         }
     }
 
@@ -151,6 +168,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void ControlDash()
+    {
+        if (canControlDash && controlDashPressed && (!wasControlDashing || controlDashTimer >= 0) && !(isGrounded || onLeftWall || onRightWall))
+            isControlDashing = true;
+        else
+            isControlDashing = false;
+
+        if (isControlDashing)
+        {
+            body.gravityScale = 0;
+            if (!wasControlDashing)
+                controlDashTimer = controlDashTime;
+            wasControlDashing = true;
+            body.velocity = new Vector2(joystickInput.x * controlDashSideSpeed, joystickInput.y * controlDashUpSpeed);
+        } 
+        else if (wasControlDashing)
+        { 
+            wasControlDashing = false;
+            canControlDash = false;
+            body.gravityScale = gravityStore;
+            body.velocity = new Vector2(body.velocity.x / controlDashSlowdown, body.velocity.y / controlDashSlowdown);
+        }
+    }
+
     private void CheckIfOnWall()
     {
         RaycastHit2D raycastHitRight = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.right, 0.1f, groundLayer);
@@ -199,6 +240,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void CheckIfCanControlDash()
+    {
+        if (isGrounded || isSliding)
+            canControlDash = true;
+    }
+
     private void OnMove(InputValue value)
     {
         joystickInput = value.Get<Vector2>();
@@ -223,10 +270,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnControlDash(InputValue value)
+    {
+        controlDashPressed = value.isPressed;
+    }
+
     private void OnGUI()
     {
-        GUI.Label(new Rect(1200, 10, 100, 100), "Jump Counter: " + jumpCounter);
-        GUI.Label(new Rect(1200, 30, 100, 100), "Jump Input: " + jumpInputUsed);
+        GUI.Label(new Rect(1200, 10, 100, 100), "Can controldash: " + canControlDash);
+        GUI.Label(new Rect(1200, 50, 100, 100), "is doing thing: " + isControlDashing );
     }
 }
 
