@@ -160,7 +160,10 @@ MonoBehaviour:
   wallJumpUpForce: 5
   dashTime: 0.25
   dashSideForce: 25
-  controlDashTime: 2
+  controlDashTime: 0.75
+  controlDashSideSpeed: 15
+  controlDashUpSpeed: 10
+  controlDashSlowdown: 3
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
